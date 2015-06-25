@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Pim\Documents\samples\app\src\main\java\Vuforia.jar"
+        jar="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\src\main\java\Vuforia.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="dc574f68d5776268181756e656458f20604240af">
-        <dex dex="C:\Users\Pim\Documents\samples\app\build\intermediates\pre-dexed\debug\Vuforia-2b2a7efbef92490dffaa2794ba243e0ae80cd2c0.jar" />
-    </item>
-    <item
-        jar="C:\Users\Pim\Documents\Assignment5\samples\app\src\main\java\Vuforia.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dc574f68d5776268181756e656458f20604240af">
-        <dex dex="C:\Users\Pim\Documents\Assignment5\samples\app\build\intermediates\pre-dexed\debug\Vuforia-40428df16f7ea045a107b3744c9b001d861b73a6.jar" />
+        <dex dex="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\build\intermediates\pre-dexed\debug\Vuforia-c9a8b31a48868652a6620e023501a967d55a720d.jar" />
     </item>
 
 </items>

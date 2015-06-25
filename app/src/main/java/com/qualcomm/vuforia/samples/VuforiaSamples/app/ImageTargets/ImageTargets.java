@@ -7,9 +7,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 package com.qualcomm.vuforia.samples.VuforiaSamples.app.ImageTargets;
 
-import java.util.ArrayList;
-import java.util.Vector;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,8 +32,8 @@ import android.widget.Toast;
 import com.qualcomm.vuforia.CameraDevice;
 import com.qualcomm.vuforia.DataSet;
 import com.qualcomm.vuforia.ObjectTracker;
-import com.qualcomm.vuforia.State;
 import com.qualcomm.vuforia.STORAGE_TYPE;
+import com.qualcomm.vuforia.State;
 import com.qualcomm.vuforia.Trackable;
 import com.qualcomm.vuforia.Tracker;
 import com.qualcomm.vuforia.TrackerManager;
@@ -51,6 +48,9 @@ import com.qualcomm.vuforia.samples.VuforiaSamples.R;
 import com.qualcomm.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenu;
 import com.qualcomm.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuGroup;
 import com.qualcomm.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuInterface;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class ImageTargets extends Activity implements SampleApplicationControl,
@@ -107,7 +107,7 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
         vuforiaAppSession = new SampleApplicationSession(this);
         
         startLoadingAnimation();
-        mDatasetStrings.add("SamsungS3mini.xml");
+        mDatasetStrings.add("ImagesPartB.xml");
 
         vuforiaAppSession
             .initAR(this, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -171,6 +171,8 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
             getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
             getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("imagen_prueba.png",
+                getAssets()));
         mTextures.add(Texture.loadTextureFromApk("ImageTargets/Buildings.jpeg",
             getAssets()));
     }
