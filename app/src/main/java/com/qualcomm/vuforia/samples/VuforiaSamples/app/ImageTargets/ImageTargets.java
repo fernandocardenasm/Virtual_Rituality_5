@@ -171,8 +171,62 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
             getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
             getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("imagen_prueba.png",
+
+        //B11 Room 013
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Monday_Complete.PNG",
                 getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Tuesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Wednesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Thursday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Friday_Complete.PNG",
+                getAssets()));
+
+        //B11 Room 014
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Monday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Tuesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Wednesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Thursday_Complete.PNG",
+            getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Friday_Complete.PNG",
+                getAssets()));
+
+        //B11 Room 015
+
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Monday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Tuesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Wednesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Thursday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Friday_Complete.PNG",
+                getAssets()));
+
+        //Berkaer Room 003
+
+        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Monday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Tuesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Wednesday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Thursday_Complete.PNG",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Friday_Complete.PNG",
+                getAssets()));
+
+        //No data to display Saturday or Sunday
+        mTextures.add(Texture.loadTextureFromApk("No_data_to_display.png",
+                getAssets()));
+
+        //Default Image
         mTextures.add(Texture.loadTextureFromApk("ImageTargets/Buildings.jpeg",
             getAssets()));
     }

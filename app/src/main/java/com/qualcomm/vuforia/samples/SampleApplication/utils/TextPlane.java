@@ -9,7 +9,7 @@ public class TextPlane extends MeshObject {
 
     private final static double planeVertices[] =
             {
-                    -20f, -20f, 0.0f, 20f, -20f, 0.0f, 20f, 20f, 0.0f, -20f, 20f, 0.0f
+                    -50f, -50f, 0.0f, 50f, -50f, 0.0f, 50f, 50f, 0.0f, -50f, 50f, 0.0f
             };
     private final static double planeTexcoords[] =
             {

@@ -30,6 +30,7 @@ import com.qualcomm.vuforia.samples.SampleApplication.utils.TextPlane;
 import com.qualcomm.vuforia.samples.SampleApplication.utils.Texture;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Vector;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -201,35 +202,77 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 .convertPose2GLMatrix(result.getPose());
             float[] modelViewMatrix = modelViewMatrix_Vuforia.getData();
             
-            int textureIndex = trackable.getName().equalsIgnoreCase("cat") ? 0
-                : 1;
+            int textureIndex = trackable.getName().equalsIgnoreCase("cat") ? 0: 1;
             textureIndex = trackable.getName().equals("city") ? 1 : textureIndex;
             textureIndex = trackable.getName().equalsIgnoreCase("tree") ? 2: textureIndex;
-            textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
-            textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
+
+
+            //Part B
+
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+            switch (day){
+                case Calendar.MONDAY:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 3: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 8: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 13: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 18: textureIndex;
+                    break;
+                case Calendar.TUESDAY:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 4: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 9: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 14: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 19: textureIndex;
+                    break;
+                case Calendar.WEDNESDAY:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 5: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 10: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 15: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 20: textureIndex;
+                    break;
+                case Calendar.THURSDAY:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 6: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 11: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 16: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 21: textureIndex;
+                    break;
+                case Calendar.FRIDAY:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 7: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 12: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 17: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 22: textureIndex;
+                    break;
+                default:
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 23: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 23: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 23: textureIndex;
+                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 23: textureIndex;
+            }
+
+//            textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
+//            textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
             
             // deal with the modelview and projection matrices
             float[] modelViewProjection = new float[16];
-            
+
+            boolean partA = trackable.getName().equalsIgnoreCase("cat") || trackable.getName().equalsIgnoreCase("city") || trackable.getName().equalsIgnoreCase("tree");
+
+
             if (!mActivity.isExtendedTrackingActive())
             {
-                if (trackable.getName().equalsIgnoreCase("b11_014")){
-                    Matrix.translateM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT,
-                            OBJECT_SCALE_FLOAT);
-                    Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
-                            OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
-                }
-                else if (trackable.getName().equalsIgnoreCase("b11_015")){
-                    Matrix.translateM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT,
+                if (partA){
+                    Matrix.translateM(modelViewMatrix, 0, 0.0f, 0.0f,
                             OBJECT_SCALE_FLOAT);
                     Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
                             OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
                 }
                 else{
-                    Matrix.translateM(modelViewMatrix, 0, 0.0f, 0.0f,
+                    Matrix.translateM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT,
                             OBJECT_SCALE_FLOAT);
                     Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
                             OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
+
                 }
 
             } else
@@ -247,35 +290,27 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
             
             if (!mActivity.isExtendedTrackingActive())
             {
-                if (trackable.getName().equalsIgnoreCase("b11_014")){
-                    Log.d("Object", "b11_014");
-                    //To replace the Teapot for a plane Image
 
-                    GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
-                            false, 0, mTextPlane.getVertices());
-                    GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
-                            false, 0, mTextPlane.getNormals());
-                    GLES20.glVertexAttribPointer(textureCoordHandle, 2,
-                            GLES20.GL_FLOAT, false, 0, mTextPlane.getTexCoords());
-                }
-                else if (trackable.getName().equalsIgnoreCase("b11_015")){
-                    Log.d("Object", "b11_015");
-                    //To replace the Teapot for a plane Image
-
-                    GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
-                            false, 0, mTextPlane.getVertices());
-                    GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
-                            false, 0, mTextPlane.getNormals());
-                    GLES20.glVertexAttribPointer(textureCoordHandle, 2,
-                            GLES20.GL_FLOAT, false, 0, mTextPlane.getTexCoords());
-                }
-                else{
+                if (partA){
                     GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
                             false, 0, mTeapot.getVertices());
                     GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
                             false, 0, mTeapot.getNormals());
                     GLES20.glVertexAttribPointer(textureCoordHandle, 2,
                             GLES20.GL_FLOAT, false, 0, mTeapot.getTexCoords());
+                }
+                else{
+
+                    Log.d("Object","Name:"+trackable.getName());
+                    //To replace the Teapot for a plane Image
+
+                    GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTextPlane.getVertices());
+                    GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTextPlane.getNormals());
+                    GLES20.glVertexAttribPointer(textureCoordHandle, 2,
+                            GLES20.GL_FLOAT, false, 0, mTextPlane.getTexCoords());
+
                 }
                 
                 GLES20.glEnableVertexAttribArray(vertexHandle);
@@ -293,26 +328,18 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false,
                     modelViewProjection, 0);
 
-                //Draw the plane image
-                if (trackable.getName().equalsIgnoreCase("b11_014")){
-                    //Draw the plane text
-                    GLES20.glDrawElements(GLES20.GL_TRIANGLES,
-                            mTextPlane.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
-                            mTextPlane.getIndices());
-
-                }
-                else if (trackable.getName().equalsIgnoreCase("b11_015")){
-                    //Draw the plane text
-                    GLES20.glDrawElements(GLES20.GL_TRIANGLES,
-                            mTextPlane.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
-                            mTextPlane.getIndices());
-
-                }
-                else{
-                    // finally draw the teapot
+                if (partA){
+                    //Finally draw the teapot
                     GLES20.glDrawElements(GLES20.GL_TRIANGLES,
                             mTeapot.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
                             mTeapot.getIndices());
+
+                }
+                else{
+                    //Draw the plane text
+                    GLES20.glDrawElements(GLES20.GL_TRIANGLES,
+                            mTextPlane.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
+                            mTextPlane.getIndices());
 
                 }
 
