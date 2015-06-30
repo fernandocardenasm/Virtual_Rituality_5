@@ -209,50 +209,27 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
 
             //Part B
 
+
+
             Calendar calendar = Calendar.getInstance();
             int day = calendar.get(Calendar.DAY_OF_WEEK);
 
-            switch (day){
-                case Calendar.MONDAY:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 3: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 8: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 13: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 18: textureIndex;
-                    break;
-                case Calendar.TUESDAY:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 4: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 9: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 14: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 19: textureIndex;
-                    break;
-                case Calendar.WEDNESDAY:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 5: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 10: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 15: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 20: textureIndex;
-                    break;
-                case Calendar.THURSDAY:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 6: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 11: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 16: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 21: textureIndex;
-                    break;
-                case Calendar.FRIDAY:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 7: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 12: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 17: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 22: textureIndex;
-                    break;
-                default:
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 23: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 23: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 23: textureIndex;
-                    textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 23: textureIndex;
+            if (day!=Calendar.SATURDAY && day!= Calendar.SUNDAY){
+
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? ImageTargets.orderImages.indexOf("b11_013")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? ImageTargets.orderImages.indexOf("b11_014")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? ImageTargets.orderImages.indexOf("b11_015")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? ImageTargets.orderImages.indexOf("berkaer_003")+3: textureIndex;
+
+            }
+            else{
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 3: textureIndex;
             }
 
-//            textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
-//            textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
-            
+
             // deal with the modelview and projection matrices
             float[] modelViewProjection = new float[16];
 

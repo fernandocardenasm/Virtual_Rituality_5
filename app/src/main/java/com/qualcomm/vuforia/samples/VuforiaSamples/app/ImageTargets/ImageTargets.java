@@ -12,6 +12,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -29,6 +31,12 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.qualcomm.vuforia.CameraDevice;
 import com.qualcomm.vuforia.DataSet;
 import com.qualcomm.vuforia.ObjectTracker;
@@ -50,6 +58,8 @@ import com.qualcomm.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMen
 import com.qualcomm.vuforia.samples.VuforiaSamples.ui.SampleAppMenu.SampleAppMenuInterface;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -94,6 +104,10 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
     private AlertDialog mErrorDialog;
     
     boolean mIsDroidDevice = false;
+
+    public static ArrayList<String> orderImages;
+
+
     
     
     // Called when the activity first starts or the user navigates back to an
@@ -120,7 +134,7 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
         
         mIsDroidDevice = android.os.Build.MODEL.toLowerCase().startsWith(
             "droid");
-        
+        orderImages = new ArrayList<String>();
     }
     
     // Process Single Tap event to trigger autofocus
@@ -165,6 +179,8 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
     
     private void loadTextures()
     {
+
+
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotBrass.png",
             getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
@@ -172,66 +188,139 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
             getAssets()));
 
-        //B11 Room 013
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Monday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Tuesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Wednesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Thursday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_013/Friday_Complete.PNG",
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        //Taken from http://stackoverflow.com/questions/24288466/retrieving-image-files-from-parse-android
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Images");
+        switch (day){
+            case Calendar.MONDAY:
+                getImagesOfTheDay(query, "monday");
+                break;
+            case Calendar.TUESDAY:
+                getImagesOfTheDay(query, "tuesday");
+                break;
+            case Calendar.WEDNESDAY:
+                getImagesOfTheDay(query, "wednesday");
+                break;
+            case Calendar.THURSDAY:
+                getImagesOfTheDay(query, "thursday");
+                break;
+            case Calendar.FRIDAY:
+                getImagesOfTheDay(query, "friday");
+                break;
+            default:
+                //Default Image
+
+                mTextures.add(Texture.loadTextureFromApk("No_data_to_display.png",
                 getAssets()));
 
-        //B11 Room 014
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Monday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Tuesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Wednesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Thursday_Complete.PNG",
-            getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_014/Friday_Complete.PNG",
-                getAssets()));
+                mTextures.add(Texture.loadTextureFromApk("ImageTargets/Buildings.jpeg",
+                        getAssets()));
+        }
 
-        //B11 Room 015
-
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Monday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Tuesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Wednesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Thursday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/B11_015/Friday_Complete.PNG",
-                getAssets()));
-
-        //Berkaer Room 003
-
-        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Monday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Tuesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Wednesday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Thursday_Complete.PNG",
-                getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("Rooms/Berkaer_003/Friday_Complete.PNG",
-                getAssets()));
-
-        //No data to display Saturday or Sunday
-        mTextures.add(Texture.loadTextureFromApk("No_data_to_display.png",
-                getAssets()));
-
-        //Default Image
-        mTextures.add(Texture.loadTextureFromApk("ImageTargets/Buildings.jpeg",
-            getAssets()));
     }
-    
-    
+
+    private void getImagesOfTheDay(ParseQuery<ParseObject> query, String day) {
+        query.whereEqualTo("day", day);
+        query.addAscendingOrder("createdAt");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e==null){
+                    for (int i = 0; i < parseObjects.size(); i++){
+                        if (parseObjects.get(i).getString("room").equalsIgnoreCase("b11_013")){
+                            final ParseFile file;
+                            file = parseObjects.get(i).getParseFile("fileName");
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException f) {
+//                                            Log.d("ROOM", "b13" + file);
+//                                            Uri fileUri = Uri.parse(file.getUrl());
+                                    if (f == null){
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        if (bmp != null){
+                                            Log.d("ROOM", "B13");
+                                            mTextures.add(Texture.loadTextureFromParse(bmp));
+                                            orderImages.add("b11_013");
+                                        }
+                                    }
+                                }
+                            });
+
+
+                            //mTextures.add(Texture.loadTextureFromParse(fileUri, ImageTargets.this));
+                        }
+                        else if (parseObjects.get(i).getString("room").equalsIgnoreCase("b11_014")){
+                            final ParseFile file;
+                            file = parseObjects.get(i).getParseFile("fileName");
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException f) {
+//                                            Log.d("ROOM", "b13" + file);
+//                                            Uri fileUri = Uri.parse(file.getUrl());
+                                    if (f == null) {
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        if (bmp != null) {
+                                            Log.d("ROOM", "B14");
+                                            mTextures.add(Texture.loadTextureFromParse(bmp));
+                                            orderImages.add("b11_014");
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
+                        else if (parseObjects.get(i).getString("room").equalsIgnoreCase("b11_015")){
+                            final ParseFile file;
+                            file = parseObjects.get(i).getParseFile("fileName");
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException f) {
+//                                            Log.d("ROOM", "b13" + file);
+//                                            Uri fileUri = Uri.parse(file.getUrl());
+                                    if (f == null) {
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        if (bmp != null) {
+                                            Log.d("ROOM", "B15");
+                                            mTextures.add(Texture.loadTextureFromParse(bmp));
+                                            orderImages.add("b11_015");
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
+                        else if (parseObjects.get(i).getString("room").equalsIgnoreCase("berkaer_003")){
+                            final ParseFile file;
+                            file = parseObjects.get(i).getParseFile("fileName");
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException f) {
+//                                            Log.d("ROOM", "b13" + file);
+//                                            Uri fileUri = Uri.parse(file.getUrl());
+                                    if (f == null) {
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        if (bmp != null) {
+                                            Log.d("ROOM", "B003");
+                                            mTextures.add(Texture.loadTextureFromParse(bmp));
+                                            orderImages.add("berkaer_003");
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                }
+                else{
+                    Log.d("Done", "error");
+                }
+            }
+        });
+    }
+
+
     // Called when the activity will start interacting with the user.
     @Override
     protected void onResume()

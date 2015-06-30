@@ -7,16 +7,16 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 package com.qualcomm.vuforia.samples.SampleApplication.utils;
 
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 
 
 // Support class for the Vuforia samples applications.
@@ -98,4 +98,17 @@ public class Texture
         texture.mSuccess = true;
         return texture;
     }
+
+    public static Texture loadTextureFromParse(Bitmap bitMap)
+    {
+        //Bitmap bitMap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), url);
+
+        int[] data = new int[bitMap.getWidth() * bitMap.getHeight()];
+        bitMap.getPixels(data, 0, bitMap.getWidth(), 0, 0,
+                bitMap.getWidth(), bitMap.getHeight());
+
+        return loadTextureFromIntBuffer(data, bitMap.getWidth(),
+                bitMap.getHeight());
+    }
+
 }

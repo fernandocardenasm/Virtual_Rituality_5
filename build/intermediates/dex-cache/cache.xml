@@ -2,11 +2,25 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\libs\Parse-1.9.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fe739334780fe321141e62720822c2d456061899">
+        <dex dex="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\build\intermediates\pre-dexed\debug\Parse-1.9.2-fd8301ae88909f8305c94a11a2b1c6630828e6db.jar" />
+    </item>
+    <item
         jar="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\src\main\java\Vuforia.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="dc574f68d5776268181756e656458f20604240af">
         <dex dex="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\build\intermediates\pre-dexed\debug\Vuforia-c9a8b31a48868652a6620e023501a967d55a720d.jar" />
+    </item>
+    <item
+        jar="C:\Users\usuario\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.2.0\6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd\bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="C:\Users\usuario\Desktop\Virtual_Rituality_5\app\build\intermediates\pre-dexed\debug\bolts-android-1.2.0-1b61e5a16bc2ee63c3fe42faa7cce8cd54360020.jar" />
     </item>
 
 </items>

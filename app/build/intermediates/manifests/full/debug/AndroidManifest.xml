@@ -58,6 +58,7 @@
       would allow the activity to be launched multiple times.
     -->
     <application
+        android:name="com.qualcomm.vuforia.samples.VuforiaSamples.app.SamplesApplication"
         android:allowBackup="true"
         android:description="@string/app_description"
         android:icon="@drawable/icon"
