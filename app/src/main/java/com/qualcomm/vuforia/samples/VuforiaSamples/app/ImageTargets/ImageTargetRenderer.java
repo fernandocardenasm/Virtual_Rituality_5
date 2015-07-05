@@ -7,12 +7,6 @@ and other countries. Trademarks of QUALCOMM Incorporated are used with permissio
 
 package com.qualcomm.vuforia.samples.VuforiaSamples.app.ImageTargets;
 
-import java.io.IOException;
-import java.util.Vector;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -32,7 +26,15 @@ import com.qualcomm.vuforia.samples.SampleApplication.utils.LoadingDialogHandler
 import com.qualcomm.vuforia.samples.SampleApplication.utils.SampleApplication3DModel;
 import com.qualcomm.vuforia.samples.SampleApplication.utils.SampleUtils;
 import com.qualcomm.vuforia.samples.SampleApplication.utils.Teapot;
+import com.qualcomm.vuforia.samples.SampleApplication.utils.TextPlane;
 import com.qualcomm.vuforia.samples.SampleApplication.utils.Texture;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Vector;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 
 // The renderer class for the ImageTargets sample. 
@@ -58,6 +60,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
     private int texSampler2DHandle;
     
     private Teapot mTeapot;
+    private TextPlane mTextPlane;
     
     private float kBuildingScale = 12.0f;
     private SampleApplication3DModel mBuildingsModel;
@@ -118,6 +121,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
     private void initRendering()
     {
         mTeapot = new Teapot();
+        mTextPlane = new TextPlane();
         
         mRenderer = Renderer.getInstance();
         
@@ -198,20 +202,58 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 .convertPose2GLMatrix(result.getPose());
             float[] modelViewMatrix = modelViewMatrix_Vuforia.getData();
             
-            int textureIndex = trackable.getName().equalsIgnoreCase("cat") ? 0
-                : 1;
-            textureIndex = trackable.getName().equalsIgnoreCase("tree") ? 2
-                : textureIndex;
-            
+            int textureIndex = trackable.getName().equalsIgnoreCase("cat") ? 0: 1;
+            textureIndex = trackable.getName().equals("city") ? 1 : textureIndex;
+            textureIndex = trackable.getName().equalsIgnoreCase("tree") ? 2: textureIndex;
+
+
+            //Part B
+
+
+
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+            if (day!=Calendar.SATURDAY && day!= Calendar.SUNDAY){
+
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? ImageTargets.orderImages.indexOf("b11_013")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? ImageTargets.orderImages.indexOf("b11_014")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? ImageTargets.orderImages.indexOf("b11_015")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? ImageTargets.orderImages.indexOf("berkaer_003")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("p_013") ? ImageTargets.orderImages.indexOf("p_013")+3: textureIndex;
+
+            }
+            else{
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_013") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("p_013") ? 3: textureIndex;
+            }
+
+
             // deal with the modelview and projection matrices
             float[] modelViewProjection = new float[16];
-            
+
+            boolean partA = trackable.getName().equalsIgnoreCase("cat") || trackable.getName().equalsIgnoreCase("city") || trackable.getName().equalsIgnoreCase("tree");
+
+
             if (!mActivity.isExtendedTrackingActive())
             {
-                Matrix.translateM(modelViewMatrix, 0, 0.0f, 0.0f,
-                    OBJECT_SCALE_FLOAT);
-                Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
-                    OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
+                if (partA){
+                    Matrix.translateM(modelViewMatrix, 0, 0.0f, 0.0f,
+                            OBJECT_SCALE_FLOAT);
+                    Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
+                            OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
+                }
+                else{
+                    Matrix.translateM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT,
+                            OBJECT_SCALE_FLOAT);
+                    Matrix.scaleM(modelViewMatrix, 0, OBJECT_SCALE_FLOAT,
+                            OBJECT_SCALE_FLOAT, OBJECT_SCALE_FLOAT);
+
+                }
+
             } else
             {
                 Matrix.rotateM(modelViewMatrix, 0, 90.0f, 1.0f, 0, 0);
@@ -220,19 +262,35 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
             }
             
             Matrix.multiplyMM(modelViewProjection, 0, vuforiaAppSession
-                .getProjectionMatrix().getData(), 0, modelViewMatrix, 0);
+                    .getProjectionMatrix().getData(), 0, modelViewMatrix, 0);
             
             // activate the shader program and bind the vertex/normal/tex coords
             GLES20.glUseProgram(shaderProgramID);
             
             if (!mActivity.isExtendedTrackingActive())
             {
-                GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
-                    false, 0, mTeapot.getVertices());
-                GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
-                        false, 0, mTeapot.getNormals());
-                GLES20.glVertexAttribPointer(textureCoordHandle, 2,
-                        GLES20.GL_FLOAT, false, 0, mTeapot.getTexCoords());
+
+                if (partA){
+                    GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTeapot.getVertices());
+                    GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTeapot.getNormals());
+                    GLES20.glVertexAttribPointer(textureCoordHandle, 2,
+                            GLES20.GL_FLOAT, false, 0, mTeapot.getTexCoords());
+                }
+                else{
+
+                    Log.d("Object","Name:"+trackable.getName());
+                    //To replace the Teapot for a plane Image
+
+                    GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTextPlane.getVertices());
+                    GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
+                            false, 0, mTextPlane.getNormals());
+                    GLES20.glVertexAttribPointer(textureCoordHandle, 2,
+                            GLES20.GL_FLOAT, false, 0, mTextPlane.getTexCoords());
+
+                }
                 
                 GLES20.glEnableVertexAttribArray(vertexHandle);
                 GLES20.glEnableVertexAttribArray(normalHandle);
@@ -240,6 +298,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 
                 // activate texture 0, bind it, and pass to shader
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextures.get(textureIndex).mTextureID[0]);
 
                 GLES20.glUniform1i(texSampler2DHandle, 0);
@@ -247,12 +306,22 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 // pass the model view matrix to the shader
                 GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false,
                     modelViewProjection, 0);
-                
-                // finally draw the teapot
-                GLES20.glDrawElements(GLES20.GL_TRIANGLES,
-                    mTeapot.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
-                    mTeapot.getIndices());
-                
+
+                if (partA){
+                    //Finally draw the teapot
+                    GLES20.glDrawElements(GLES20.GL_TRIANGLES,
+                            mTeapot.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
+                            mTeapot.getIndices());
+
+                }
+                else{
+                    //Draw the plane text
+                    GLES20.glDrawElements(GLES20.GL_TRIANGLES,
+                            mTextPlane.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
+                            mTextPlane.getIndices());
+
+                }
+
                 // disable the enabled arrays
                 GLES20.glDisableVertexAttribArray(vertexHandle);
                 GLES20.glDisableVertexAttribArray(normalHandle);
@@ -265,7 +334,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 GLES20.glVertexAttribPointer(normalHandle, 3, GLES20.GL_FLOAT,
                     false, 0, mBuildingsModel.getNormals());
                 GLES20.glVertexAttribPointer(textureCoordHandle, 2,
-                    GLES20.GL_FLOAT, false, 0, mBuildingsModel.getTexCoords());
+                        GLES20.GL_FLOAT, false, 0, mBuildingsModel.getTexCoords());
                 
                 GLES20.glEnableVertexAttribArray(vertexHandle);
                 GLES20.glEnableVertexAttribArray(normalHandle);

@@ -1,8 +1,6 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
@@ -13,6 +11,8 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 uses-sdk
 ADDED from AndroidManifest.xml:14:5
 	android:targetSdkVersion
@@ -54,142 +54,144 @@ ADDED from AndroidManifest.xml:51:5
 application
 ADDED from AndroidManifest.xml:63:5
 	android:label
-		ADDED from AndroidManifest.xml:65:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:68:9
-	android:icon
-		ADDED from AndroidManifest.xml:64:9
-	android:theme
-		ADDED from AndroidManifest.xml:69:9
-	android:description
 		ADDED from AndroidManifest.xml:66:9
 	android:launchMode
+		ADDED from AndroidManifest.xml:68:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:69:9
+	android:icon
+		ADDED from AndroidManifest.xml:65:9
+	android:description
 		ADDED from AndroidManifest.xml:67:9
+	android:theme
+		ADDED from AndroidManifest.xml:70:9
+	android:name
+		ADDED from AndroidManifest.xml:64:9
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivitySplashScreen
-ADDED from AndroidManifest.xml:88:10
+ADDED from AndroidManifest.xml:89:10
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:91:13
-	android:noHistory
 		ADDED from AndroidManifest.xml:92:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:90:13
-	android:name
-		ADDED from AndroidManifest.xml:89:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:94:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:95:17
-	android:name
-		ADDED from AndroidManifest.xml:95:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:97:17
-	android:name
-		ADDED from AndroidManifest.xml:97:27
-activity#com.qualcomm.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
-ADDED from AndroidManifest.xml:101:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:104:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:103:13
-	android:name
-		ADDED from AndroidManifest.xml:102:13
-activity#com.qualcomm.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen
-ADDED from AndroidManifest.xml:108:10
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:111:13
 	android:noHistory
+		ADDED from AndroidManifest.xml:93:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:91:13
+	android:name
+		ADDED from AndroidManifest.xml:90:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:95:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:96:17
+	android:name
+		ADDED from AndroidManifest.xml:96:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:98:17
+	android:name
+		ADDED from AndroidManifest.xml:98:27
+activity#com.qualcomm.vuforia.samples.VuforiaSamples.ui.ActivityList.ActivityLauncher
+ADDED from AndroidManifest.xml:102:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:105:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:104:13
+	android:name
+		ADDED from AndroidManifest.xml:103:13
+activity#com.qualcomm.vuforia.samples.VuforiaSamples.ui.ActivityList.AboutScreen
+ADDED from AndroidManifest.xml:109:10
+	android:screenOrientation
 		ADDED from AndroidManifest.xml:112:13
+	android:noHistory
+		ADDED from AndroidManifest.xml:113:13
 	android:configChanges
+		ADDED from AndroidManifest.xml:111:13
+	android:name
 		ADDED from AndroidManifest.xml:110:13
-	android:name
-		ADDED from AndroidManifest.xml:109:13
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.ImageTargets.ImageTargets
-ADDED from AndroidManifest.xml:116:9
+ADDED from AndroidManifest.xml:117:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:121:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:119:13
+	android:theme
+		ADDED from AndroidManifest.xml:120:10
+	android:name
 		ADDED from AndroidManifest.xml:118:13
-	android:theme
-		ADDED from AndroidManifest.xml:119:10
-	android:name
-		ADDED from AndroidManifest.xml:117:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:120:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.TextRecognition.TextReco
-ADDED from AndroidManifest.xml:124:9
+ADDED from AndroidManifest.xml:125:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:129:12
 	android:configChanges
+		ADDED from AndroidManifest.xml:127:13
+	android:theme
+		ADDED from AndroidManifest.xml:128:10
+	android:name
 		ADDED from AndroidManifest.xml:126:13
-	android:theme
-		ADDED from AndroidManifest.xml:127:10
-	android:name
-		ADDED from AndroidManifest.xml:125:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:128:12
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.CylinderTargets.CylinderTargets
-ADDED from AndroidManifest.xml:132:9
+ADDED from AndroidManifest.xml:133:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:137:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:135:13
+	android:theme
+		ADDED from AndroidManifest.xml:136:10
+	android:name
 		ADDED from AndroidManifest.xml:134:13
-	android:theme
-		ADDED from AndroidManifest.xml:135:10
-	android:name
-		ADDED from AndroidManifest.xml:133:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:136:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.FrameMarkers.FrameMarkers
-ADDED from AndroidManifest.xml:140:9
+ADDED from AndroidManifest.xml:141:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:145:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:143:13
+	android:theme
+		ADDED from AndroidManifest.xml:144:10
+	android:name
 		ADDED from AndroidManifest.xml:142:13
-	android:theme
-		ADDED from AndroidManifest.xml:143:10
-	android:name
-		ADDED from AndroidManifest.xml:141:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:144:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.VirtualButtons.VirtualButtons
-ADDED from AndroidManifest.xml:148:9
+ADDED from AndroidManifest.xml:149:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:153:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:151:13
+	android:theme
+		ADDED from AndroidManifest.xml:152:10
+	android:name
 		ADDED from AndroidManifest.xml:150:13
-	android:theme
-		ADDED from AndroidManifest.xml:151:10
-	android:name
-		ADDED from AndroidManifest.xml:149:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:152:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.UserDefinedTargets.UserDefinedTargets
-ADDED from AndroidManifest.xml:156:9
+ADDED from AndroidManifest.xml:157:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:161:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:159:13
+	android:theme
+		ADDED from AndroidManifest.xml:160:10
+	android:name
 		ADDED from AndroidManifest.xml:158:13
-	android:theme
-		ADDED from AndroidManifest.xml:159:10
-	android:name
-		ADDED from AndroidManifest.xml:157:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:160:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.MultiTargets.MultiTargets
-ADDED from AndroidManifest.xml:164:9
+ADDED from AndroidManifest.xml:165:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:169:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:167:13
+	android:theme
+		ADDED from AndroidManifest.xml:168:10
+	android:name
 		ADDED from AndroidManifest.xml:166:13
-	android:theme
-		ADDED from AndroidManifest.xml:167:10
-	android:name
-		ADDED from AndroidManifest.xml:165:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:168:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.CloudRecognition.CloudReco
-ADDED from AndroidManifest.xml:172:9
+ADDED from AndroidManifest.xml:173:9
+	android:launchMode
+		ADDED from AndroidManifest.xml:177:11
 	android:configChanges
+		ADDED from AndroidManifest.xml:175:13
+	android:theme
+		ADDED from AndroidManifest.xml:176:10
+	android:name
 		ADDED from AndroidManifest.xml:174:13
-	android:theme
-		ADDED from AndroidManifest.xml:175:10
-	android:name
-		ADDED from AndroidManifest.xml:173:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:176:11
 activity#com.qualcomm.vuforia.samples.VuforiaSamples.app.ObjectRecognition.ObjectTargets
-ADDED from AndroidManifest.xml:180:9
-	android:configChanges
-		ADDED from AndroidManifest.xml:182:13
-	android:theme
-		ADDED from AndroidManifest.xml:183:10
-	android:name
-		ADDED from AndroidManifest.xml:181:13
+ADDED from AndroidManifest.xml:181:9
 	android:launchMode
-		ADDED from AndroidManifest.xml:184:11
+		ADDED from AndroidManifest.xml:185:11
+	android:configChanges
+		ADDED from AndroidManifest.xml:183:13
+	android:theme
+		ADDED from AndroidManifest.xml:184:10
+	android:name
+		ADDED from AndroidManifest.xml:182:13

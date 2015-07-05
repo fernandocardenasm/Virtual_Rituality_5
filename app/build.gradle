@@ -19,4 +19,6 @@ android {
 
 dependencies {
     compile files('src/main/java/Vuforia.jar')
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    compile 'com.parse.bolts:bolts-android:1.+'
 }
