@@ -220,6 +220,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? ImageTargets.orderImages.indexOf("b11_014")+3: textureIndex;
                 textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? ImageTargets.orderImages.indexOf("b11_015")+3: textureIndex;
                 textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? ImageTargets.orderImages.indexOf("berkaer_003")+3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("p_013") ? ImageTargets.orderImages.indexOf("p_013")+3: textureIndex;
 
             }
             else{
@@ -227,6 +228,7 @@ public class ImageTargetRenderer implements GLSurfaceView.Renderer
                 textureIndex = trackable.getName().equalsIgnoreCase("b11_014") ? 3: textureIndex;
                 textureIndex = trackable.getName().equalsIgnoreCase("b11_015") ? 3: textureIndex;
                 textureIndex = trackable.getName().equalsIgnoreCase("berkaer_003") ? 3: textureIndex;
+                textureIndex = trackable.getName().equalsIgnoreCase("p_013") ? 3: textureIndex;
             }
 
 

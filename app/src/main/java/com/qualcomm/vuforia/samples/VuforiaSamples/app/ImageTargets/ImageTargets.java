@@ -311,6 +311,26 @@ public class ImageTargets extends Activity implements SampleApplicationControl,
                             });
 
                         }
+                        else if (parseObjects.get(i).getString("room").equalsIgnoreCase("p_013")){
+                            final ParseFile file;
+                            file = parseObjects.get(i).getParseFile("fileName");
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] bytes, ParseException f) {
+//                                            Log.d("ROOM", "b13" + file);
+//                                            Uri fileUri = Uri.parse(file.getUrl());
+                                    if (f == null) {
+                                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                        if (bmp != null) {
+                                            Log.d("ROOM", "P_013");
+                                            mTextures.add(Texture.loadTextureFromParse(bmp));
+                                            orderImages.add("p_013");
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
                     }
                 }
                 else{
